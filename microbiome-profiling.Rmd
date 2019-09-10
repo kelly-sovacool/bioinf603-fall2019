@@ -1,0 +1,40 @@
+---
+title: "Microbial community profiling for human microbiome projects: \n Tools, techniques, and challenges"
+subtitle: "Michael Hamady & Rob Knight. Genome Res. 2009."
+author: "Presented by Kelly Sovacool"
+date: "23 Sept. 2019"
+output:
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
+```
+```{r render, eval=FALSE}
+rmarkdown::render("microbiome-profiling.Rmd", output_dir = "docs/")
+```
+
+## Outline
+
+---
+
+## Background
+
+- What is a microbiome?
+- What is community analysis?
+```{r}
+knitr::include_graphics("figures/F1.large.jpg")
+```
+
+---
+
+## Techniques
+
+---
+
+## Discussion
+
+---
+
+## Conclusions
