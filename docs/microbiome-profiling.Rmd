@@ -170,8 +170,6 @@ knitr::include_graphics("figures/multi-omics_16S-rRNA.jpg")
 
 ### Techniques: OTU clustering algorithms
 
-- Nearest-neighbor: greedily add a sequence if it is similar to *any* sequence in the OTU
-- Furthest-neighbor: only add a sequence if it is similar to *all* other sequences in the OTU
 
 .center[
 ```{r, out.width='100%'}
@@ -179,6 +177,11 @@ knitr::include_graphics("figures/F5.E-F.jpg")
 ```
 ]
 **Fig. 5 E & F**
+
+- Nearest-neighbor: greedily add a sequence if it is similar to *any* sequence in the OTU
+- Furthest-neighbor: only add a sequence if it is similar to *all* other sequences in the OTU
+
+[See [Westcott & Schloss, PeerJ 2015](https://peerj.com/articles/1487/) for a more recent detailed comparison of OTU clustering algorithms.]
 
 ---
 
@@ -241,8 +244,14 @@ knitr::include_graphics("figures/F3.large.jpg")
 
 ## My Conclusions
 
+- Summarizes the techniques, best practices, and questions to consider in microbial community analysis at the time (2009).
+- Although many of the tools and technologies have changed, the concepts presented here are still relevant today.
+
+### Limitations
+
 - Lacked substantial discussion of the strenghs & weakenesses of different clustering algorithms.
-- How does the quality of OTU assignments produced by different algorithms compare?
+  - How does the quality of OTU assignments produced by different algorithms compare?
+- Mentions some of the tools used (e.g. Unifrac, DOTUR), but there are many gaps for a full analysis pipeline.
   
 
 ---
