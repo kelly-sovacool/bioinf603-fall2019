@@ -4,8 +4,7 @@
     <title>Microbial community profiling for human microbiome projects: Tools, techniques, and challenges</title>
     <meta charset="utf-8" />
     <meta name="author" content="Presented by Kelly Sovacool" />
-    <link href="microbiome-profiling_files/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="microbiome-profiling_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs/remark-css-0.0.1/default.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -24,25 +23,179 @@ class: center, middle, inverse, title-slide
 
 ## Outline
 
----
-
-## Background
-
-- What is a microbiome?
-- What is community analysis?
-![](figures/F1.large.jpg)&lt;!-- --&gt;
+- Background
+- Key Questions
+- Techniques in microbial community profiling
+- Discussion
+- My Conclusions
 
 ---
 
-## Techniques
+### Background
+
+**Microbiome**: The collection of microbes that live in an environment.
+
+.center[
+&lt;img src="figures/Microbiome_spheres_2016_EMBL.jpg" width="80%" /&gt;
+]
+
+.footnote[
+[1] [EMBL-EBI: What's a microbiome](https://www.ebi.ac.uk/about/news/feature-story/whats-a-microbiome)
+]
 
 ---
 
-## Discussion
+### Background: Why care?
+
+Changes in the composition of the human microbiome are associated with health and disease.
+
+.center[
+&lt;img src="figures/human_microbiome.gif" width="80%" /&gt;
+]
+
+.footnote[
+[2] [The Human Microbiome Project, Nature 2012](https://dx.doi.org/10.1038%2Fnature11234) [3] [theconversation.com/the-human-microbiome](http://theconversation.com/the-human-microbiome-is-a-treasure-trove-waiting-to-be-unlocked-118757)
+]
+
+---
+### Background
+- **Microbial community profiling**: Characterize **which microbes are present** and how **abundant** they are.
+
+---
+### Background
+- **Microbial community profiling**: Characterize **which microbes are present** and how **abundant** they are.
+
+- Application: detetecting colorectal cancer
+.center[
+&lt;img src="figures/baxter_2016_genome-med.png" width="100%" /&gt;
+]
+
+.footnote[
+[4] [Baxter et al., Genome Med. 2016](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0290-3)
+]
 
 ---
 
-## Conclusions
+### Background: Operational Taxonomic Unit (OTU)
+
+- Proxy for microbial species at different taxonomic levels.
+- Created by clustering sequences based on sequence similarity.
+- Avoids difficulties of classifying bacteria into species when unknown organisms are present.
+
+&lt;img src="figures/OTU_clustering.png" width="100%" /&gt;
+
+---
+
+### Key Questions Raised
+
+- Is there a core set of microbial species or genes that all humans share?
+
+- How do changes in microbial abundances at particular taxonomic levels relate to health &amp; disease?
+
+---
+## Techniques: Overall Workflow
+
+.center[
+&lt;img src="figures/F2.large.jpg" width="100%" /&gt;
+]
+Fig. 2
+---
+### Techniques: Sequencing
+
+#### Metagenomics _vs._ 16S rRNA
+
+- Metagenomics
+    - Whole-genome shotgun sequencing.
+    - Measures functional potential of the whole microbiome.
+    - Need longer reads and greater sampling depth to discover rare sequences.
+    
+- 16S rRNA
+    - Only sequence part of the 16S rRNA gene, which is highly conserved across microbial species.
+    - Useful for comparing at different taxon levels (phylum through species) becauase some regions evolve quickly while others evolve more slowly.
+    - Sufficient to estimate which microbes are present at the genus level and their abundances.
+    - Long reads and high sampling depth aren't necessary.
+
+---
+
+### Techniques: Sequencing
+
+- Selecting regions of the 16S rRNA gene. 
+- V2 and V4 yield similar results to the full-length gene. 
+- V6 is not recommended due to many unclassified sequences.
+
+---
+
+### Techniques: Clustering OTUs
+
+.pull-left[
+&lt;img src="figures/multi-omics_16S-rRNA.jpg" width="60%" /&gt;
+]
+
+.pull-right[
+- Cluster similar 16S sequences into Operational Taxonomic Units (OTUs).
+
+- Compare abundances of OTUs within and across samples.
+]
+
+.footnote[
+[5] [Bikel et al., Comput. Struct. Biotech. 2015](10.1016/j.csbj.2015.06.001)
+]
+
+---
+
+### Techniques: OTU clustering algorithms
+
+- Nearest-neighbor: greedily add a sequence if it is similar to *any* sequence in the OTU
+- Furthest-neighbor: only add a sequence if it is similar to *all* other sequences in the OTU
+
+.center[
+&lt;img src="figures/F5.E-F.jpg" width="100%" /&gt;
+]
+Fig. 5 E &amp; F
+
+---
+
+### Techniques: Comparing Communities
+
+.pull-left[Phylum-level] .pull-right[OTU-level (proxy for species)]
+
+
+.center[
+&lt;img src="figures/F3.large.jpg" width="100%" /&gt;
+]
+Fig. 3: 22 human gut samples show quite different abundances even at the phylum level .
+
+---
+
+## Discussion: Key Questions Addressed
+
+- Is there a core set of microbial species or genes that all humans share?
+  - Microbiomes between individuals vary greatly by which species are present and their abundances.
+  - No species are shared at high abundance.
+  
+- How do changes in microbial abundances at particular taxonomic levels relate to health &amp; disease?
+  - Focus on gene sets, rather than taxon levels, to compare functional potential of microbiomes.
+
+---
+
+## My Conclusions
+
+- Discussion of tree-based vs taxon-based methods concluded that tree-based methods are better, but didn't provide substantial evidence.
+- Lacked substantial discussion of the strenghs &amp; weakenesses of different clustering algorithms.
+  - How does the quality of OTU assignments produced by different algorithms compare.
+
+---
+
+## Advancements
+
+- mothur &amp; QIIME
+- optiClust
+
+---
+
+## Towards integrated omics
+
+https://www-sciencedirect-com.proxy.lib.umich.edu/science/article/pii/S2001037015000318#f0005
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
