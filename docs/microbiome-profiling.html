@@ -11,7 +11,7 @@
 class: center, middle, inverse, title-slide
 
 # Microbial community profiling for human microbiome projects: Tools, techniques, and challenges
-## Michael Hamady &amp; Rob Knight. Genome Res. 2009.
+## Hamady &amp; Knight, Genome Res. 2009
 ### Presented by Kelly Sovacool
 ### 23 Sept. 2019
 
@@ -20,6 +20,20 @@ class: center, middle, inverse, title-slide
 
 
 
+
+## Acknowledgements
+
+Reviewers:
+
+- Wenjin Gu
+- Kevin Tracy
+
+Instructors:
+
+- Dr. Armand Bankhead
+- Dr. Josh Welch
+
+---
 
 ## Outline
 
@@ -35,51 +49,98 @@ class: center, middle, inverse, title-slide
 **Microbiome**: The collection of microbes that live in an environment.
 
 .center[
-&lt;img src="figures/Microbiome_spheres_2016_EMBL.jpg" width="80%" /&gt;
+&lt;img src="figures/Microbiome_spheres_2016_EMBL.jpg" width="90%" /&gt;
 ]
 
 .footnote[
-[1] [EMBL-EBI: What's a microbiome](https://www.ebi.ac.uk/about/news/feature-story/whats-a-microbiome)
+[[EMBL-EBI: What's a microbiome?](https://www.ebi.ac.uk/about/news/feature-story/whats-a-microbiome)]
 ]
 
 ---
 
 ### Background: Why care?
 
+.center[
 Changes in the composition of the human microbiome are associated with health and disease.
-
-.center[
-&lt;img src="figures/human_microbiome.gif" width="80%" /&gt;
+&lt;img src="figures/human_microbiome.gif" width="85%" /&gt;
 ]
 
 .footnote[
-[2] [The Human Microbiome Project, Nature 2012](https://dx.doi.org/10.1038%2Fnature11234) [3] [theconversation.com/the-human-microbiome](http://theconversation.com/the-human-microbiome-is-a-treasure-trove-waiting-to-be-unlocked-118757)
+[[The Human Microbiome Project, Nature 2012](https://dx.doi.org/10.1038%2Fnature11234)]   [[theconversation.com/the-human-microbiome](http://theconversation.com/the-human-microbiome-is-a-treasure-trove-waiting-to-be-unlocked-118757)]
 ]
 
 ---
 ### Background
-- **Microbial community profiling**: Characterize **which microbes are present** and how **abundant** they are.
+- **Microbial community profiling**: Characterize which microbes are present and how abundant they are.
 
 ---
 ### Background
-- **Microbial community profiling**: Characterize **which microbes are present** and how **abundant** they are.
+- **Microbial community profiling**: Characterize which microbes are present and how abundant they are.
 
-- Application: detetecting colorectal cancer
-.center[
-&lt;img src="figures/baxter_2016_genome-med.png" width="100%" /&gt;
+- Application: detecting colorectal cancer (CRC)
+  - Colonoscopy is invasive, but the best way to detect CRC.
+  - Profiled microbiota from fecal samples of cancer patients and healthy individuals.
+  - Classified individuals as healthy vs cancer based on microbial DNA, compared to colonoscopy results as ground truth.
+  - Microbial community profiling improved classifications over other less-invasive methods.
+
+.center[  
+👤👤👤 ➡️ 💩💩💩 ➡️ 🦠🦠🦠 ️➡️ 🧬🧬🧬 ➡️ 💻 ➡️  📊
 ]
 
 .footnote[
-[4] [Baxter et al., Genome Med. 2016](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0290-3)
+[Baxter et al., Genome Med. 2016](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0290-3)
+]
+
+---
+
+### Background: Phylogeny &amp; Taxonomy
+
+.center[
+**Phylogeny**: building evolutionary trees.
+
+&lt;img src="figures/tree_khan.png" width="100%" /&gt;
+]
+
+.footnote[
+[[khanacademy.org: evolutionary trees](https://www.khanacademy.org/science/biology/her/tree-of-life/a/building-an-evolutionary-tree)]
+]
+
+---
+### Background: Phylogeny &amp; Taxonomy
+
+.center[
+**Taxonomy**: classifying organisms, informed by phylogeny.
+
+&lt;img src="figures/tree_twitter.png" width="80%" /&gt;
+]
+
+.footnote[
+[[twitter.com/biolojical](https://twitter.com/biolojical/status/1142920063999025152)]
+]
+
+---
+### Background: Phylogeny &amp; Taxonomy
+
+Challenges for classifying prokaryotes:
+- Asexual reproduction
+- Fast evolutionary change
+- Horizontal gene transfer
+
+.center[
+&lt;img src="figures/nature_hgt.png" width="80%" /&gt;
+]
+
+.footnote[
+[[Smets &amp; Barkay, Nature Reviews 2005](https://doi.org/10.1038/nrmicro1253)]
 ]
 
 ---
 
 ### Background: Operational Taxonomic Unit (OTU)
 
-- Proxy for microbial species at different taxonomic levels.
+- Proxy for microbial species (or any desired taxonomic level).
 - Created by clustering sequences based on sequence similarity.
-- Avoids difficulties of classifying bacteria into species when unknown organisms are present.
+- Avoids difficulties of classifying bacteria into species, especially when unknown organisms are present.
 
 &lt;img src="figures/OTU_clustering.png" width="100%" /&gt;
 
@@ -111,31 +172,37 @@ Changes in the composition of the human microbiome are associated with health an
 .center[
 &lt;img src="figures/F2.large.jpg" width="100%" /&gt;
 ]
+
 **Fig. 2**
+
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)]
+]
 ---
 ### Techniques: Sequencing
 
 #### Metagenomics _vs._ 16S rRNA
 
-- Metagenomics
-    - Whole-genome shotgun sequencing.
-    - Measures functional potential of the whole microbiome.
-    - Need longer reads and greater sampling depth to discover rare sequences.
-    
-- 16S rRNA
-    - Only sequence part of the 16S rRNA gene, which is highly conserved across microbial species.
-    - Useful for comparing at different taxon levels (phylum through species) becauase some regions evolve quickly while others evolve more slowly.
-    - Sufficient to estimate which microbes are present at the genus level and their abundances.
-    - Long reads and high sampling depth aren't necessary.
+|   | Metagenomics | 16s rRNA |
+|------|--------------|----------|
+| **Technique** | Whole-genome shotgun sequencing | Only sequence part of the 16S rRNA gene |
+| **Purpose** | Measures functional potential of the whole microbiome | Sufficient to estimate which microbes are present and their abundances |
+| **Organisms** | Bacteria, archaea, viruses, fungi | Bacteria &amp; archaea only | 
+| **Requirements** | Need long reads to cover genes | Short reads are sufficient |
+| **Cost** | 💲💲💲 | 💲 |
 
 ---
 
 ### Techniques: Sequencing 16S rRNA gene regions
 
 .center[
-&lt;img src="figures/F4.A.jpg" width="90%" /&gt;
+&lt;img src="figures/F4.A.jpg" width="80%" /&gt;
 ]
+
 **Fig. 4 A**: V2 and V4 yield similar results to the full-length gene. V6 is not recommended due to the many unclassified sequences.
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)]
+]
 
 ---
 
@@ -145,49 +212,163 @@ Changes in the composition of the human microbiome are associated with health an
 &lt;img src="figures/multi-omics_16S-rRNA.jpg" width="60%" /&gt;
 ]
 
-.pull-right[
 - Cluster similar 16S sequences into Operational Taxonomic Units (OTUs).
-
 - Compare abundances of OTUs within and across samples.
-]
 
 .footnote[
-[5] [Bikel et al., Comput. Struct. Biotech. 2015](10.1016/j.csbj.2015.06.001)
+[[Bikel et al., Comput. Struct. Biotech. 2015](10.1016/j.csbj.2015.06.001)]
+]
+
+---
+
+### Techniques: Clustering OTUs
+
+1. Calculate all pairwise sequence identity scores to create a distance matrix.
+2. Apply cutoff of 97% sequence identity to create an adjacency matrix.
+.center[
+```
+seqA AGGGTACG
+seqB ACG-TACG
+```
+$$ \%\ sequence\ identity =  100 * \frac{number\ of\ matches}{sequence\  length} $$
+]
+.pull-left[
+1) Distance matrix:
+
+| | Seq1 | Seq2 | Seq3 |
+|-|------|------|------|
+| Seq1 | - | 98 | 87 |
+| Seq2 | 98 | - | 76 |
+| Seq3 | 87 | 76 | - |
+]
+.pull-right[
+2) Adjacency matrix:
+
+| | Seq1 | Seq2 | Seq3 |
+|-|------|------|------|
+| Seq1 | - | 1 | 0 |
+| Seq2 | 1 | - | 0 |
+| Seq3 | 0 | 0 | - |
 ]
 
 ---
 
 ### Techniques: OTU clustering algorithms
 
-
 .center[
 &lt;img src="figures/F5.E-F.jpg" width="100%" /&gt;
 ]
+
 **Fig. 5 E &amp; F**
 
 - Nearest-neighbor: greedily add a sequence if it is similar to *any* sequence in the OTU
 - Furthest-neighbor: only add a sequence if it is similar to *all* other sequences in the OTU
+- Average neighbor: compromise between the two.
 
-[See [Westcott &amp; Schloss, PeerJ 2015](https://peerj.com/articles/1487/) for a more recent detailed comparison of OTU clustering algorithms.]
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)]
+[[Westcott &amp; Schloss, PeerJ 2015](https://peerj.com/articles/1487/)]
+]
 
 ---
 
 ### Techniques: Comparing communities
-
 - Alpha diversity: how many OTUs are in a sample
 - Beta diversity: how are OTUs shared among samples
 - Community membership: presence/absence of OTUs
 - Community structure: relative abundance of OTUs
 
+---
 
-.pull-left[Phylum-level] .pull-right[OTU-level (proxy for species)]
+### Techniques: Comparing communities
 
+Phylum-level: relative abundance
+.center[
+&lt;img src="figures/F3.A.jpg" width="80%" /&gt;
+]
+
+**Fig. 3**: 22 human gut samples show quite different abundances.
+
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)]
+]
+---
+
+### Techniques: Comparing communities
+OTU-level: presence/absence of OTUs
 
 .center[
-&lt;img src="figures/F3.large.jpg" width="100%" /&gt;
+&lt;img src="figures/F3.B.jpg" width="60%" /&gt;
 ]
-**Fig. 3**: 22 human gut samples show quite different abundances even at the phylum level.
-1813 of 2320 OTUs were present in only one sample.
+
+**Fig. 3**: 1813 of 2320 OTUs were present in only one sample.
+
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)]
+]
+
+---
+
+### Techniques: Comparing communities
+
+#### Phylogenetic- vs Taxon-based analysis
+
+.pull-left[ 
+Taxon-based: assume all OTUs are equally related. 
+]
+.pull-right[ 
+Phylogenetic: attempt to build a tree from OTUs.
+]
+
+![](figures/Phylogeny_Star_vs_Hierarchical.jpg)&lt;!-- --&gt;
+
+.footnote[
+[image: [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:Phylogeny_Star_vs_Hierarchical.jpg)]
+[Unifrac: [mothur.org/wiki/Unweighted_UniFrac_algorithm](https://mothur.org/wiki/Unweighted_UniFrac_algorithm)]
+]
+
+---
+
+### Techniques: Comparing communities
+
+Phylogenetic- vs Taxon-based analysis
+
+.center[
+![](figures/F4.B.jpg)&lt;!-- --&gt;
+]
+
+**Fig. 4B**: PCoA on full-length 16S samples. All methods give equivalent results, clustering the samples by individual.
+
+- Unifrac (phylogenetic): distance between a pair of communities as the proportion of evolution that is unique to one community or the other.
+
+- Euclidean &amp; Kulcynski are taxon-based distance metrics.
+
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)] [[sequentix.de/distance_measures](https://www.sequentix.de/gelquest/help/distance_measures.htm)]
+]
+
+---
+
+### Techniques: Comparing communities
+
+Phylogenetic methods outperform taxon-based when sequence depth is low.
+
+![](figures/F4.E.jpg)&lt;!-- --&gt;
+
+**Fig. 4E**: Effect of different clustering measures on (yellow) vertebrate gut and (red) free-living samples.
+
+.pull-right[
+
+Jaccard index: $$ \frac{|A \cap B|}{|A \cup B|} $$
+
+]
+
+.footnote[
+[[Hamady &amp; Knight, Genome Res. 2009](https://doi.org/10.1101/gr.085464.108)] 
+[[sequentix.de/distance_measures](https://www.sequentix.de/gelquest/help/distance_measures.htm)]
+
+]
+
 ---
 
 ## Outline
@@ -223,21 +404,30 @@ Changes in the composition of the human microbiome are associated with health an
   - Clustering
   - Comparing Communities
 - Discussion
-- **My Conclusions**
+- **Conclusion**
 
 ---
 
-## My Conclusions
+## Conclusion
 
 - Summarizes the techniques, best practices, and questions to consider in microbial community analysis at the time (2009).
 - Although many of the tools and technologies have changed, the concepts presented here are still relevant today.
 
+---
+
 ### Limitations
 
 - Lacked substantial discussion of the strenghs &amp; weakenesses of different clustering algorithms.
+  - Many other algorithms besides nearest &amp; furthest neighbor.
   - How does the quality of OTU assignments produced by different algorithms compare?
+- Did not discuss limitations of phylogenetic-based comparison of communities with Unifrac.
+  - Unifrac only tests whether communities have the _same_ structure; does not indicate a level of similarity.
+  - Taxon-based methods do quantify a level of similarity.
 - Mentions some of the tools used (e.g. Unifrac, DOTUR), but there are many gaps for a full analysis pipeline.
   
+.footnote[
+[[mothur.org/wiki/Unifrac.weighted](https://www.mothur.org/wiki/Unifrac.weighted)]
+]
 
 ---
 
@@ -247,10 +437,15 @@ Changes in the composition of the human microbiome are associated with health an
 - mothur &amp; QIIME: comprehensive tools for microbial community profiling.
 - optiClust: OTU clustering algorithm in mothur.
 
-.center[
-&lt;img src="figures/schloss_mothur_2009_ASM.png" width="100%" /&gt;&lt;img src="figures/schloss_OptiClust_2017_mSphere.png" width="100%" /&gt;
+.pull-left[
+&lt;img src="figures/mothur_RGB.png" width="80%" /&gt;
 ]
-
+.pull-right[
+![](figures/qiime_logo_large.png)&lt;!-- --&gt;
+]
+.footnote[
+[[mothur.org/wiki](https://mothur.org/wiki)] [[riffomonas.org/minimalR](http://www.riffomonas.org/minimalR/)]
+]
 ---
 
 ### Towards integrated omics
@@ -258,8 +453,14 @@ Changes in the composition of the human microbiome are associated with health an
 &lt;img src="figures/multi-omics.jpg" width="100%" /&gt;
 ]
 .footnote[
-[5] [Bikel et al., Comput. Struct. Biotech. 2015](10.1016/j.csbj.2015.06.001)
+[[Bikel et al., Comput. Struct. Biotech. 2015](10.1016/j.csbj.2015.06.001)]
 ]
+
+---
+
+### These slides are available on GitHub: 
+
+https://github.com/kelly-sovacool/bioinf603-fall2019
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
