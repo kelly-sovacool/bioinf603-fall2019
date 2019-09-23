@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
 ```
 ```{r render, eval=FALSE}
 library(xaringan)
-rmarkdown::render("microbiome-profiling.Rmd")eihdccjgleekkufgrurujfikbducnukldtkvjehlvvhb
+rmarkdown::render("microbiome-profiling.Rmd")
 ```
 
 
@@ -478,7 +478,9 @@ knitr::include_graphics("figures/qiime_logo_large.png")
 ]
 .footnote[
 [[mothur.org/wiki](https://mothur.org/wiki)] [[riffomonas.org/minimalR](http://www.riffomonas.org/minimalR/)]
+[[qiime2.org/](https://qiime2.org/)]
 ]
+
 ---
 
 ### Towards integrated omics
